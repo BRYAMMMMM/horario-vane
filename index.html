@@ -1,0 +1,2567 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tu horario</title>
+
+
+    <style>
+        /* =====================================================
+   VARIABLES
+===================================================== */
+
+        :root {
+
+            --black: #111111;
+            --black-soft: #1c1c1c;
+
+            --beige: #e5d6c1;
+            --cream: #f7f1e8;
+
+            --brown: #796957;
+
+            --pink: #d88c9d;
+            --pink-light: #f1cbd3;
+
+            --white: #fffdf9;
+
+        }
+
+
+        /* =====================================================
+   GENERAL
+===================================================== */
+
+        * {
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            background:
+                var(--cream);
+
+            color:
+                var(--black);
+
+            overflow-x:
+                hidden;
+
+        }
+
+
+        /* =====================================================
+   NAVEGACIÓN
+===================================================== */
+
+        .navbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 17px 28px;
+
+            background:
+                rgba(247, 241, 232, .90);
+
+            backdrop-filter:
+                blur(15px);
+
+            border-bottom:
+                1px solid rgba(121, 105, 87, .15);
+
+        }
+
+
+        .logo {
+
+            font-size: .72rem;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 25px;
+
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: var(--black);
+
+            font-size: .75rem;
+
+            letter-spacing: 1px;
+
+            transition: .25s;
+
+        }
+
+
+        .nav-links a:hover {
+
+            color: var(--pink);
+
+        }
+
+
+        /* =====================================================
+   INICIO
+===================================================== */
+
+        #inicio {
+
+            min-height:
+                calc(100vh - 65px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+        }
+
+
+        .home {
+
+            width: min(900px, 100%);
+
+        }
+
+
+        .small-title {
+
+            text-transform: uppercase;
+
+            letter-spacing: 5px;
+
+            font-size: .7rem;
+
+            color: var(--brown);
+
+            margin-bottom: 22px;
+
+        }
+
+
+        /* =====================================================
+   FECHA PRINCIPAL
+===================================================== */
+
+        .today-title {
+
+            font-size:
+                clamp(3.5rem, 10vw, 7.5rem);
+
+            font-weight: normal;
+
+            line-height: .88;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .today-title span {
+
+            display: block;
+
+        }
+
+
+        /* =====================================================
+   MENSAJE CAMISETA
+===================================================== */
+
+        .shirt-message {
+
+            margin-top: 38px;
+
+        }
+
+
+        .shirt-message .label {
+
+            font-size: .7rem;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            color: var(--brown);
+
+        }
+
+
+        .shirt-message .color-name {
+
+            margin-top: 10px;
+
+            font-size:
+                clamp(1.8rem, 5vw, 3rem);
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            font-weight: normal;
+
+        }
+
+
+        /* =====================================================
+   CAMISETA GRANDE
+===================================================== */
+
+        .shirt-container {
+
+            margin: 42px auto 25px;
+
+        }
+
+
+        .shirt {
+
+            width: 200px;
+
+            height: 205px;
+
+            margin: auto;
+
+            clip-path:
+                polygon(22% 0,
+                    42% 12%,
+                    58% 12%,
+                    78% 0,
+                    100% 25%,
+                    84% 43%,
+                    72% 34%,
+                    72% 100%,
+                    28% 100%,
+                    28% 34%,
+                    16% 43%,
+                    0 25%);
+
+            filter:
+                drop-shadow(0 20px 18px rgba(0, 0, 0, .20));
+
+            animation:
+                shirtAppear .8s ease;
+
+        }
+
+
+        .shirt.black {
+
+            background: #111111;
+
+        }
+
+
+        .shirt.beige {
+
+            background: #e5d6c1;
+
+        }
+
+
+        @keyframes shirtAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform: scale(.7);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: scale(1);
+
+            }
+
+        }
+
+
+        /* =====================================================
+   MAÑANA
+===================================================== */
+
+        .tomorrow {
+
+            margin-top: 20px;
+
+            color: #6d655d;
+
+        }
+
+
+        .tomorrow-title {
+
+            font-size: .65rem;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .tomorrow-text {
+
+            margin-top: 7px;
+
+            font-size: .95rem;
+
+        }
+
+
+        /* =====================================================
+   GATITO
+===================================================== */
+
+        .cat-area {
+
+            width: 190px;
+
+            height: 170px;
+
+            position: relative;
+
+            margin: 20px auto 0;
+
+            cursor: pointer;
+
+        }
+
+
+        .cat {
+
+            position: absolute;
+
+            width: 105px;
+
+            height: 95px;
+
+            left: 40px;
+
+            top: 45px;
+
+            background: #c6a785;
+
+            border-radius:
+                48% 48% 45% 45%;
+
+            animation:
+                catDance 1s infinite ease-in-out;
+
+        }
+
+
+        .cat::before,
+        .cat::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: -25px;
+
+            width: 38px;
+
+            height: 43px;
+
+            background: #c6a785;
+
+        }
+
+
+        .cat::before {
+
+            left: 5px;
+
+            transform: rotate(-28deg);
+
+            clip-path:
+                polygon(0 100%,
+                    20% 0,
+                    100% 70%);
+
+        }
+
+
+        .cat::after {
+
+            right: 5px;
+
+            transform: rotate(28deg);
+
+            clip-path:
+                polygon(0 70%,
+                    80% 0,
+                    100% 100%);
+
+        }
+
+
+        .eye {
+
+            position: absolute;
+
+            top: 37px;
+
+            width: 8px;
+
+            height: 13px;
+
+            background: #111111;
+
+            border-radius: 50%;
+
+        }
+
+
+        .eye.left {
+
+            left: 28px;
+
+        }
+
+
+        .eye.right {
+
+            right: 28px;
+
+        }
+
+
+        .nose {
+
+            position: absolute;
+
+            top: 55px;
+
+            left: 46px;
+
+            width: 13px;
+
+            height: 8px;
+
+            background: #965b68;
+
+            border-radius: 50%;
+
+        }
+
+
+        .mouth {
+
+            position: absolute;
+
+            top: 63px;
+
+            left: 42px;
+
+            width: 22px;
+
+            height: 12px;
+
+            border-bottom:
+                2px solid #654a40;
+
+            border-radius: 50%;
+
+        }
+
+
+        .tail {
+
+            position: absolute;
+
+            right: -38px;
+
+            bottom: 15px;
+
+            width: 70px;
+
+            height: 25px;
+
+            border:
+                9px solid #c6a785;
+
+            border-left: 0;
+
+            border-radius:
+                0 30px 30px 0;
+
+            transform: rotate(-20deg);
+
+            animation:
+                tailMove .9s infinite ease-in-out;
+
+        }
+
+
+        .cat-heart {
+
+            position: absolute;
+
+            top: 0;
+
+            right: 15px;
+
+            font-size: 32px;
+
+            color: var(--pink);
+
+            animation:
+                heartFloat 1.4s infinite ease-in-out;
+
+        }
+
+
+        @keyframes catDance {
+
+            0%,
+            100% {
+
+                transform:
+                    rotate(-4deg) translateY(0);
+
+            }
+
+            50% {
+
+                transform:
+                    rotate(4deg) translateY(-10px);
+
+            }
+
+        }
+
+
+        @keyframes tailMove {
+
+            0%,
+            100% {
+
+                transform:
+                    rotate(-20deg);
+
+            }
+
+            50% {
+
+                transform:
+                    rotate(25deg);
+
+            }
+
+        }
+
+
+        @keyframes heartFloat {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0) scale(1);
+
+                opacity: .7;
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-12px) scale(1.2);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        .cat-text {
+
+            position: absolute;
+
+            bottom: -2px;
+
+            width: 100%;
+
+            text-align: center;
+
+            font-size: .65rem;
+
+            color: #81776e;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =====================================================
+   BOTÓN NO TOCAR
+===================================================== */
+
+        .no-touch {
+
+            margin-top: 30px;
+
+            width: 220px;
+
+            height: 72px;
+
+            border:
+                1px solid #c87587;
+
+            background: transparent;
+
+            color: #9d5968;
+
+            cursor: pointer;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            transition: .3s;
+
+        }
+
+
+        .no-touch strong {
+
+            display: block;
+
+            font-size: 1rem;
+
+            letter-spacing: 3px;
+
+            font-weight: normal;
+
+        }
+
+
+        .no-touch small {
+
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: .55rem;
+
+            letter-spacing: 2px;
+
+            opacity: .7;
+
+        }
+
+
+        .no-touch:hover {
+
+            background: #9d5968;
+
+            color: white;
+
+            transform: scale(1.04);
+
+        }
+
+
+        /* =====================================================
+   CALENDARIO
+===================================================== */
+
+        #calendario {
+
+            background: var(--black);
+
+            color: white;
+
+            padding: 90px 20px 110px;
+
+        }
+
+
+        .calendar-container {
+
+            width: min(1200px, 100%);
+
+            margin: auto;
+
+        }
+
+
+        .calendar-header {
+
+            text-align: center;
+
+            margin-bottom: 60px;
+
+        }
+
+
+        .calendar-header small {
+
+            color: var(--pink-light);
+
+            font-size: .65rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 5px;
+
+        }
+
+
+        .calendar-header h2 {
+
+            margin-top: 13px;
+
+            font-size:
+                clamp(3rem, 7vw, 5.5rem);
+
+            font-weight: normal;
+
+        }
+
+
+        /* =====================================================
+   MES
+===================================================== */
+
+        .month {
+
+            margin-bottom: 65px;
+
+            padding: 32px;
+
+            background:
+                rgba(255, 255, 255, .035);
+
+            border:
+                1px solid rgba(255, 255, 255, .12);
+
+            border-radius: 4px;
+
+        }
+
+
+        .month-title {
+
+            font-size: 2rem;
+
+            font-weight: normal;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        /* =====================================================
+   DÍAS SEMANA
+===================================================== */
+
+        .weekdays,
+        .days {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            gap: 7px;
+
+        }
+
+
+        .weekday {
+
+            text-align: center;
+
+            padding: 10px 3px;
+
+            font-size: .65rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            color: #bcae9c;
+
+        }
+
+
+        /* =====================================================
+   CASILLERO
+===================================================== */
+
+        .day {
+
+            min-height: 115px;
+
+            padding: 11px;
+
+            position: relative;
+
+            background:
+                rgba(255, 255, 255, .035);
+
+            border:
+                1px solid rgba(255, 255, 255, .10);
+
+            border-radius: 4px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            transition:
+                background .25s,
+                transform .25s;
+
+        }
+
+
+        .day:hover {
+
+            background:
+                rgba(255, 255, 255, .08);
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .day-number {
+
+            width: 100%;
+
+            text-align: left;
+
+            font-size: .95rem;
+
+            color: #eeeeee;
+
+        }
+
+
+        /* =====================================================
+   CAMISETA PEQUEÑA
+===================================================== */
+
+        .day-shirt {
+
+            width: 34px;
+
+            height: 36px;
+
+            margin-top: 10px;
+
+            flex-shrink: 0;
+
+            clip-path:
+                polygon(22% 0,
+                    42% 12%,
+                    58% 12%,
+                    78% 0,
+                    100% 25%,
+                    84% 43%,
+                    72% 34%,
+                    72% 100%,
+                    28% 100%,
+                    28% 34%,
+                    16% 43%,
+                    0 25%);
+
+        }
+
+
+        /* =====================================================
+   NEGRA
+===================================================== */
+
+        .day-shirt.black {
+
+            background: #080808;
+
+            border:
+                2px solid #d8d8d8;
+
+            box-shadow:
+                0 3px 7px rgba(0, 0, 0, .35);
+
+        }
+
+
+        /* =====================================================
+   BEIGE
+===================================================== */
+
+        .day-shirt.beige {
+
+            background: #e5d6c1;
+
+            border:
+                1px solid #ffffff;
+
+            box-shadow:
+                0 3px 7px rgba(0, 0, 0, .25);
+
+        }
+
+
+        /* =====================================================
+   TEXTO DEL COLOR
+===================================================== */
+
+        .day-shirt-name {
+
+            margin-top: 5px;
+
+            font-size: .48rem;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            font-weight: bold;
+
+            line-height: 1;
+
+        }
+
+
+        .day-shirt-name.black {
+
+            color: #d8d8d8;
+
+        }
+
+
+        .day-shirt-name.beige {
+
+            color: #d8c6ad;
+
+        }
+
+
+        /* =====================================================
+   SORPRESA
+===================================================== */
+
+        .surprise {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            background:
+                rgba(17, 17, 17, .98);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                opacity .7s ease;
+
+        }
+
+
+        .surprise.active {
+
+            opacity: 1;
+
+            pointer-events: auto;
+
+        }
+
+
+        .surprise-content {
+
+            transform: scale(.7);
+
+            transition:
+                transform .8s ease;
+
+        }
+
+
+        .surprise.active .surprise-content {
+
+            transform: scale(1);
+
+        }
+
+
+        .surprise-small {
+
+            color: var(--pink-light);
+
+            text-transform: uppercase;
+
+            letter-spacing: 5px;
+
+            font-size: .65rem;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .te-quiero {
+
+            color: white;
+
+            font-size:
+                clamp(4rem, 13vw, 9rem);
+
+            font-weight: normal;
+
+            line-height: .9;
+
+            animation:
+                lovePulse 1.4s infinite ease-in-out;
+
+        }
+
+
+        @keyframes lovePulse {
+
+            0%,
+            100% {
+
+                transform: scale(1);
+
+            }
+
+            50% {
+
+                transform: scale(1.06);
+
+            }
+
+        }
+
+
+        .surprise-cat {
+
+            margin-top: 25px;
+
+        }
+
+
+        .surprise-cat .cat {
+
+            animation:
+                surpriseDance .35s infinite alternate ease-in-out;
+
+        }
+
+
+        @keyframes surpriseDance {
+
+            from {
+
+                transform:
+                    rotate(-14deg) translateY(0);
+
+            }
+
+            to {
+
+                transform:
+                    rotate(14deg) translateY(-14px);
+
+            }
+
+        }
+
+
+        .surprise-message {
+
+            margin-top: 20px;
+
+            color: #cfc5b9;
+
+            font-size: .9rem;
+
+        }
+
+
+        .close-surprise {
+
+            margin-top: 28px;
+
+            padding: 11px 25px;
+
+            background: transparent;
+
+            border:
+                1px solid rgba(255, 255, 255, .3);
+
+            color: white;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+        }
+
+
+        /* =====================================================
+   CORAZONES
+===================================================== */
+
+        .floating-heart {
+
+            position: fixed;
+
+            z-index: 1200;
+
+            pointer-events: none;
+
+            color: var(--pink);
+
+            font-size: 24px;
+
+            animation:
+                flyHeart 2s ease-out forwards;
+
+        }
+
+
+        @keyframes flyHeart {
+
+            0% {
+
+                transform:
+                    translateY(0) scale(.5);
+
+                opacity: 1;
+
+            }
+
+            100% {
+
+                transform:
+                    translateY(-200px) scale(1.5);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+   MÓVIL
+===================================================== */
+
+        @media(max-width:700px) {
+
+            .navbar {
+
+                padding: 15px;
+
+            }
+
+
+            .nav-links {
+
+                gap: 15px;
+
+            }
+
+
+            .nav-links a {
+
+                font-size: .65rem;
+
+            }
+
+
+            .day {
+
+                min-height: 95px;
+
+                padding: 7px;
+
+            }
+
+
+            .day-shirt {
+
+                width: 27px;
+
+                height: 29px;
+
+                margin-top: 9px;
+
+            }
+
+
+            .day-shirt-name {
+
+                font-size: .42rem;
+
+                letter-spacing: 1px;
+
+            }
+
+
+            .weekday {
+
+                font-size: .52rem;
+
+            }
+
+
+            .month {
+
+                padding: 15px;
+
+            }
+
+
+            .weekdays,
+            .days {
+
+                gap: 4px;
+
+            }
+
+
+            .day-number {
+
+                font-size: .8rem;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+     NAVEGACIÓN
+===================================================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Tu horario
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="#inicio">
+                Inicio
+            </a>
+
+            <a href="#calendario">
+                Calendario
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+     INICIO
+===================================================== -->
+
+    <section id="inicio">
+
+        <div class="home">
+
+
+            <div class="small-title">
+
+                Un pequeño detalle para ti
+
+            </div>
+
+
+
+            <h1 class="today-title">
+
+                <span id="todayDay">
+                    HOY ES
+                </span>
+
+                <span id="todayDate">
+                    17 DE AGOSTO
+                </span>
+
+            </h1>
+
+
+
+            <div class="shirt-message">
+
+                <div class="label">
+
+                    Hoy te toca
+
+                </div>
+
+
+                <div class="color-name" id="shirtName">
+
+                    CAMISETA NEGRA
+
+                </div>
+
+            </div>
+
+
+
+            <div class="shirt-container">
+
+                <div id="mainShirt" class="shirt black"></div>
+
+            </div>
+
+
+
+            <div class="tomorrow">
+
+                <div class="tomorrow-title">
+
+                    Mañana
+
+                </div>
+
+
+                <div class="tomorrow-text" id="tomorrowText">
+
+                    18 de agosto · camiseta beige
+
+                </div>
+
+            </div>
+
+
+
+            <!-- GATITO -->
+
+            <div class="cat-area">
+
+                <div class="cat-heart">
+                    ♥
+                </div>
+
+
+                <div class="cat">
+
+                    <div class="eye left"></div>
+
+                    <div class="eye right"></div>
+
+                    <div class="nose"></div>
+
+                    <div class="mouth"></div>
+
+                    <div class="tail"></div>
+
+                </div>
+
+
+                <div class="cat-text">
+
+                    tu mascota del día
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NO TOCAR -->
+
+            <button class="no-touch" id="noTouch">
+
+                <strong>
+                    NO TOCAR
+                </strong>
+
+
+                <small>
+                    te estoy avisando
+                </small>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+     CALENDARIO
+===================================================== -->
+
+    <section id="calendario">
+
+        <div class="calendar-container">
+
+
+            <div class="calendar-header">
+
+                <small>
+
+                    17 DE AGOSTO — 31 DE DICIEMBRE
+
+                </small>
+
+
+                <h2>
+
+                    Nuestro calendario
+
+                </h2>
+
+            </div>
+
+
+            <div id="calendar"></div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+     SORPRESA
+===================================================== -->
+
+    <div class="surprise" id="surprise">
+
+
+        <div class="surprise-content">
+
+
+            <div class="surprise-small">
+
+                te dije que no tocaras
+
+            </div>
+
+
+
+            <div class="te-quiero">
+
+                TE QUIERO
+
+            </div>
+
+
+
+            <div class="cat-area surprise-cat">
+
+                <div class="cat-heart">
+                    ♥
+                </div>
+
+
+                <div class="cat">
+
+                    <div class="eye left"></div>
+
+                    <div class="eye right"></div>
+
+                    <div class="nose"></div>
+
+                    <div class="mouth"></div>
+
+                    <div class="tail"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="surprise-message">
+
+                Ahora el gatito va a bailar por ti.
+
+            </div>
+
+
+
+            <button class="close-surprise" onclick="closeSurprise()">
+
+                volver
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        /* =====================================================
+           FECHAS BASE
+        ===================================================== */
+
+        const START_DATE =
+            new Date(
+                2026,
+                7,
+                17
+            );
+
+
+        const END_DATE =
+            new Date(
+                2026,
+                11,
+                31
+            );
+
+
+        /* =====================================================
+           FECHA ACTUAL
+        ===================================================== */
+
+        function getToday() {
+
+            const now =
+                new Date();
+
+
+            return new Date(
+
+                now.getFullYear(),
+
+                now.getMonth(),
+
+                now.getDate()
+
+            );
+
+        }
+
+
+        /* =====================================================
+           COLOR SEGÚN FECHA
+        ===================================================== */
+
+        /*
+            ESTA ES LA PARTE CORREGIDA.
+        
+            17/08/2026 = NEGRA
+            18/08/2026 = BEIGE
+            19/08/2026 = NEGRA
+            20/08/2026 = BEIGE
+        
+            Se utiliza UTC para evitar cualquier
+            problema de zona horaria.
+        */
+
+        function getShirtColor(date) {
+
+            const startUTC =
+                Date.UTC(
+                    2026,
+                    7,
+                    17
+                );
+
+
+            const dateUTC =
+                Date.UTC(
+                    date.getFullYear(),
+                    date.getMonth(),
+                    date.getDate()
+                );
+
+
+            const difference =
+                Math.round(
+                    (
+                        dateUTC -
+                        startUTC
+                    )
+                    /
+                    86400000
+                );
+
+
+            if (
+                difference < 0
+            ) {
+
+                return null;
+
+            }
+
+
+            /*
+                PAR:
+        
+                0 = NEGRA
+                2 = NEGRA
+                4 = NEGRA
+        
+                IMPAR:
+        
+                1 = BEIGE
+                3 = BEIGE
+                5 = BEIGE
+            */
+
+            if (
+                difference % 2 === 0
+            ) {
+
+                return "black";
+
+            }
+
+
+            return "beige";
+
+        }
+
+
+        /* =====================================================
+           NOMBRES
+        ===================================================== */
+
+        function getColorName(color) {
+
+            if (
+                color === "black"
+            ) {
+
+                return "CAMISETA NEGRA";
+
+            }
+
+
+            return "CAMISETA BEIGE";
+
+        }
+
+
+        function getSmallColorName(color) {
+
+            if (
+                color === "black"
+            ) {
+
+                return "NEGRA";
+
+            }
+
+
+            return "BEIGE";
+
+        }
+
+
+        /* =====================================================
+           MES
+        ===================================================== */
+
+        function getMonthName(date) {
+
+            return date.toLocaleDateString(
+
+                "es-ES",
+
+                {
+                    month:
+                        "long"
+                }
+
+            );
+
+        }
+
+
+        /* =====================================================
+           INICIO DINÁMICO
+        ===================================================== */
+
+        function updateHome() {
+
+
+            const today =
+                getToday();
+
+
+            const color =
+                getShirtColor(
+                    today
+                );
+
+
+
+            document.getElementById(
+                "todayDay"
+            ).textContent =
+                "HOY ES";
+
+
+
+            document.getElementById(
+                "todayDate"
+            ).textContent =
+
+                today
+                    .getDate()
+                    .toString()
+                    .padStart(
+                        2,
+                        "0"
+                    )
+
+                +
+
+                " DE "
+
+                +
+
+                getMonthName(
+                    today
+                ).toUpperCase();
+
+
+
+            const shirt =
+                document.getElementById(
+                    "mainShirt"
+                );
+
+
+            if (color) {
+
+                shirt.className =
+                    "shirt " + color;
+
+
+                document.getElementById(
+                    "shirtName"
+                ).textContent =
+                    getColorName(
+                        color
+                    );
+
+            }
+
+
+
+            /*
+                MAÑANA
+            */
+
+            const tomorrow =
+                new Date(
+                    today
+                );
+
+
+            tomorrow.setDate(
+
+                tomorrow.getDate()
+                +
+                1
+
+            );
+
+
+            const tomorrowColor =
+                getShirtColor(
+                    tomorrow
+                );
+
+
+            if (
+
+                tomorrowColor
+                &&
+                tomorrow <= END_DATE
+
+            ) {
+
+
+                document.getElementById(
+                    "tomorrowText"
+                ).textContent =
+
+                    tomorrow
+                        .getDate()
+
+                    +
+
+                    " de "
+
+                    +
+
+                    getMonthName(
+                        tomorrow
+                    )
+
+                    +
+
+                    " · camiseta "
+
+                    +
+
+                    getSmallColorName(
+                        tomorrowColor
+                    ).toLowerCase();
+
+            }
+
+        }
+
+
+        /*
+            EJECUTAR AL ABRIR.
+        */
+
+        updateHome();
+
+
+
+        /* =====================================================
+           CALENDARIO FIJO
+        ===================================================== */
+
+        function createCalendar() {
+
+
+            const calendar =
+                document.getElementById(
+                    "calendar"
+                );
+
+
+            /*
+                IMPORTANTE:
+        
+                El calendario comienza
+                en AGOSTO 2026.
+        
+                Aunque agosto empieza
+                el día 1, solamente desde
+                el día 17 aparece camiseta.
+            */
+
+            let current =
+                new Date(
+                    2026,
+                    7,
+                    1
+                );
+
+
+            while (
+                current <= END_DATE
+            ) {
+
+
+                const year =
+                    current.getFullYear();
+
+
+                const month =
+                    current.getMonth();
+
+
+
+                /* =================================================
+                   MES
+                ================================================= */
+
+                const monthContainer =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                monthContainer.className =
+                    "month";
+
+
+
+                /* =================================================
+                   TÍTULO
+                ================================================= */
+
+                const title =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                title.className =
+                    "month-title";
+
+
+                const monthName =
+                    current.toLocaleDateString(
+
+                        "es-ES",
+
+                        {
+                            month:
+                                "long"
+                        }
+
+                    );
+
+
+                title.textContent =
+
+                    monthName
+                        .charAt(0)
+                        .toUpperCase()
+
+                    +
+
+                    monthName.slice(1)
+
+                    +
+
+                    " "
+
+                    +
+
+                    year;
+
+
+                monthContainer.appendChild(
+                    title
+                );
+
+
+
+                /* =================================================
+                   DÍAS DE LA SEMANA
+                ================================================= */
+
+                const weekdays =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                weekdays.className =
+                    "weekdays";
+
+
+                const names = [
+
+                    "Dom",
+                    "Lun",
+                    "Mar",
+                    "Mié",
+                    "Jue",
+                    "Vie",
+                    "Sáb"
+
+                ];
+
+
+                names.forEach(
+
+                    name => {
+
+
+                        const day =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        day.className =
+                            "weekday";
+
+
+                        day.textContent =
+                            name;
+
+
+                        weekdays.appendChild(
+                            day
+                        );
+
+                    }
+
+                );
+
+
+                monthContainer.appendChild(
+                    weekdays
+                );
+
+
+
+                /* =================================================
+                   CONTENEDOR DE DÍAS
+                ================================================= */
+
+                const days =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                days.className =
+                    "days";
+
+
+
+                /* =================================================
+                   PRIMER DÍA
+                ================================================= */
+
+                const firstDay =
+                    new Date(
+
+                        year,
+                        month,
+                        1
+
+                    ).getDay();
+
+
+
+                /* =================================================
+                   CANTIDAD DE DÍAS
+                ================================================= */
+
+                const daysInMonth =
+                    new Date(
+
+                        year,
+                        month + 1,
+                        0
+
+                    ).getDate();
+
+
+
+                /* =================================================
+                   ESPACIOS
+                ================================================= */
+
+                for (
+
+                    let i = 0;
+
+                    i < firstDay;
+
+                    i++
+
+                ) {
+
+
+                    days.appendChild(
+
+                        document.createElement(
+                            "div"
+                        )
+
+                    );
+
+                }
+
+
+
+                /* =================================================
+                   CREAR DÍAS
+                ================================================= */
+
+                for (
+
+                    let number = 1;
+
+                    number <= daysInMonth;
+
+                    number++
+
+                ) {
+
+
+                    const date =
+                        new Date(
+
+                            year,
+                            month,
+                            number
+
+                        );
+
+
+                    const cell =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    cell.className =
+                        "day";
+
+
+
+                    /* =================================================
+                       NÚMERO
+                    ================================================= */
+
+                    const numberElement =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    numberElement.className =
+                        "day-number";
+
+
+                    numberElement.textContent =
+                        number;
+
+
+                    cell.appendChild(
+                        numberElement
+                    );
+
+
+
+                    /* =================================================
+                       CAMISETA
+        
+                       SOLO DEL 17 DE AGOSTO
+                       HASTA EL 31 DE DICIEMBRE.
+                    ================================================= */
+
+                    if (
+
+                        date >= START_DATE
+
+                        &&
+
+                        date <= END_DATE
+
+                    ) {
+
+
+                        const color =
+                            getShirtColor(
+                                date
+                            );
+
+
+
+                        /* CAMISETA */
+
+                        const miniShirt =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        miniShirt.className =
+                            "day-shirt "
+                            +
+                            color;
+
+
+                        cell.appendChild(
+                            miniShirt
+                        );
+
+
+
+                        /* NOMBRE */
+
+                        const miniShirtName =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        miniShirtName.className =
+                            "day-shirt-name "
+                            +
+                            color;
+
+
+                        miniShirtName.textContent =
+                            getSmallColorName(
+                                color
+                            );
+
+
+                        cell.appendChild(
+                            miniShirtName
+                        );
+
+                    }
+
+
+
+                    days.appendChild(
+                        cell
+                    );
+
+                }
+
+
+
+                monthContainer.appendChild(
+                    days
+                );
+
+
+                calendar.appendChild(
+                    monthContainer
+                );
+
+
+
+                /* SIGUIENTE MES */
+
+                current =
+                    new Date(
+
+                        year,
+                        month + 1,
+                        1
+
+                    );
+
+            }
+
+        }
+
+
+        /*
+            SE GENERA UNA SOLA VEZ.
+        
+            NO SE ACTUALIZA CON EL DÍA.
+        */
+
+        createCalendar();
+
+
+
+        /* =====================================================
+           ACTUALIZACIÓN AUTOMÁTICA DEL INICIO
+        ===================================================== */
+
+        let lastDate =
+            getToday().getTime();
+
+
+
+        setInterval(
+
+            () => {
+
+
+                const currentDate =
+                    getToday().getTime();
+
+
+                if (
+
+                    currentDate !==
+                    lastDate
+
+                ) {
+
+
+                    lastDate =
+                        currentDate;
+
+
+                    /*
+                        SOLO CAMBIA LA PORTADA.
+                    */
+
+                    updateHome();
+
+                }
+
+            },
+
+            60000
+
+        );
+
+
+
+        /* =====================================================
+           NO TOCAR
+        ===================================================== */
+
+        document
+            .getElementById(
+                "noTouch"
+            )
+            .addEventListener(
+                "click",
+                openSurprise
+            );
+
+
+
+        function openSurprise() {
+
+
+            document
+                .getElementById(
+                    "surprise"
+                )
+                .classList.add(
+                    "active"
+                );
+
+
+
+            /*
+                CORAZONES
+            */
+
+            for (
+
+                let i = 0;
+
+                i < 45;
+
+                i++
+
+            ) {
+
+
+                setTimeout(
+
+                    () => {
+
+
+                        createHeart(
+
+                            Math.random()
+                            *
+                            window.innerWidth,
+
+                            window.innerHeight
+                            *
+                            (
+                                .4
+                                +
+                                Math.random()
+                                *
+                                .4
+                            )
+
+                        );
+
+
+                    },
+
+                    i * 60
+
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           CERRAR SORPRESA
+        ===================================================== */
+
+        function closeSurprise() {
+
+
+            document
+                .getElementById(
+                    "surprise"
+                )
+                .classList.remove(
+                    "active"
+                );
+
+        }
+
+
+
+        /* =====================================================
+           CORAZONES
+        ===================================================== */
+
+        function createHeart(x, y) {
+
+
+            const heart =
+                document.createElement(
+                    "div"
+                );
+
+
+            heart.className =
+                "floating-heart";
+
+
+            heart.textContent =
+                "♥";
+
+
+            heart.style.left =
+                x + "px";
+
+
+            heart.style.top =
+                y + "px";
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(
+
+                () => {
+
+                    heart.remove();
+
+                },
+
+                2000
+
+            );
+
+        }
+
+
+
+        /* =====================================================
+           ESCAPE
+        ===================================================== */
+
+        document.addEventListener(
+
+            "keydown",
+
+            event => {
+
+
+                if (
+
+                    event.key ===
+                    "Escape"
+
+                ) {
+
+
+                    closeSurprise();
+
+                }
+
+            }
+
+        );
+
+    </script>
+
+
+</body>
+
+</html>
